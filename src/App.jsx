@@ -67,30 +67,13 @@ const CATEGORIES = [
 
 // ─── AI Analysis ───────────────────────────────────────────────
 async function analyzeReel(url) {
-  const prompt = `A user shared this social media reel URL: ${url}
-
-Analyze this restaurant and extract info. Respond ONLY with valid JSON, no markdown:
-{
-  "name": "Restaurant name",
-  "type": "Cuisine description (e.g. Italian · Pizza)",
-  "location": "City, Country",
-  "categories": ["array of ALL matching IDs from: pizza,sushi,japanese,korean,thai,chinese,mexican,italian,greek,burgers,fastfood,healthy,dessert,breakfast,soup,seafood,steakhouse,vegan"],
-  "description": "One exciting sentence about this place"
-}
-A Neapolitan pizza spot gets ["pizza","italian"]. A ramen shop gets ["japanese","soup"]. Pick ALL that apply.`;
-
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetch("/api/analyze", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-    }),
+    body: JSON.stringify({ url }),
   });
-  const data = await res.json();
-  const text = data.content?.map((b) => b.text || "").join("") || "";
-  return JSON.parse(text.replace(/```json|```/g, "").trim());
+  if (!res.ok) throw new Error("Failed to analyze");
+  return res.json();
 }
 
 // ─── Global Styles ─────────────────────────────────────────────
