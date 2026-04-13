@@ -67,11 +67,17 @@ const CATEGORIES = [
 
 // ─── AI Analysis ───────────────────────────────────────────────
 async function analyzeReel(url) {
-  const res = await fetch("/api/analyze", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url }),
-  });
+  const res = await fetch(
+    "https://aphdhxukrqsqccozwbeu.supabase.co/functions/v1/analyze",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwaGRoeHVrcnFzcWNjb3p3YmV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNDQ2MjgsImV4cCI6MjA5MDcyMDYyOH0.mwD1brWgQ5jiWKJItJP4g7neVabQCymbFoULx3NPtZU",
+      },
+      body: JSON.stringify({ url }),
+    }
+  );
   if (!res.ok) throw new Error("Failed to analyze");
   return res.json();
 }
