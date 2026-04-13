@@ -1,11 +1,6 @@
 {
   "buildCommand": "vite build",
   "outputDirectory": "dist",
-  "functions": {
-    "src/api/*.js": {
-      "runtime": "@vercel/node"
-    }
-  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
