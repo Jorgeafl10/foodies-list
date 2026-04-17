@@ -441,7 +441,7 @@ function RestaurantCard({ r, onToggleVisited, onUpdate, onDelete }) {
                 style={{ padding: "6px 12px", borderRadius: 20,
                   background: "linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)",
                   color: "#fff", textDecoration: "none", fontSize: 12, fontWeight: 700 }}>
-                📸 Ver Instagram
+                📸 Ver reel
               </a>
             )}
             <span style={{ padding: "6px 12px", borderRadius: 20,
